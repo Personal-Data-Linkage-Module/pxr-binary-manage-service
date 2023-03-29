@@ -1,0 +1,9 @@
+{
+    "chunkCountMax": 255,
+    "chunkDataMax": 255,
+    "uploadPath": "./public/upload/",
+    "downloadPath": "./public/download/",
+    "downloadURL": "http://localhost:10001/download/",
+    "operatorUrl": "http://localhost:3000/operator",
+    "timezone": "Asia/Tokyo"
+}

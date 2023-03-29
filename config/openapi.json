@@ -1,0 +1,761 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "binary-manage",
+        "version": "1.0",
+        "description": "バイナリ管理サービス"
+    },
+    "servers": [
+        {
+            "url": "/binary-manage"
+        }
+    ],
+    "paths": {
+        "/download/{id}/{chunkNo}": {
+            "post": {
+                "tags": [
+                    "ファイルダウンロード"
+                ],
+                "description": "対象ファイルのダウンロードURLを取得します。",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "session",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "セッション情報",
+                            "example": {
+                                "sessionId": "sessionId",
+                                "operatorId": 1,
+                                "type": 3,
+                                "loginId": "loginid",
+                                "name": "test-user",
+                                "mobilePhone": "0311112222",
+                                "auth": {
+                                    "add": true,
+                                    "update": true,
+                                    "delete": true
+                                },
+                                "lastLoginAt": "2020-01-01T00:00:00.000+0900",
+                                "attributes": {},
+                                "roles": [
+                                    {
+                                        "_value": 1,
+                                        "_ver": 1
+                                    }
+                                ],
+                                "block": {
+                                    "_value": 1000110,
+                                    "_ver": 1
+                                },
+                                "actor": {
+                                    "_value": 1000001,
+                                    "_ver": 1
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "description": "ファイル管理ID(UUID)",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "example": "990e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                        "name": "chunkNo",
+                        "description": "ファイル分割数",
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ファイルダウンロードURLの取得に成功した際のレスポンスコード",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "description": "ファイルダウンロードのレスポンス",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "ファイル管理ID(UUID)",
+                                            "example": "990e8400-e29b-41d4-a716-446655440000"
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "description": "ダウンロードURL",
+                                            "example": "http://localhost:10001/download/test.jpg"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/download/start/{id}": {
+            "post": {
+                "tags": [
+                    "ファイルダウンロード開始"
+                ],
+                "description": "ファイルダウンロードを開始します。",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "session",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "セッション情報",
+                            "example": {
+                                "sessionId": "sessionId",
+                                "operatorId": 1,
+                                "type": 3,
+                                "loginId": "loginid",
+                                "name": "test-user",
+                                "mobilePhone": "0311112222",
+                                "auth": {
+                                    "add": true,
+                                    "update": true,
+                                    "delete": true
+                                },
+                                "lastLoginAt": "2020-01-01T00:00:00.000+0900",
+                                "attributes": {},
+                                "roles": [
+                                    {
+                                        "_value": 1,
+                                        "_ver": 1
+                                    }
+                                ],
+                                "block": {
+                                    "_value": 1000110,
+                                    "_ver": 1
+                                },
+                                "actor": {
+                                    "_value": 1000001,
+                                    "_ver": 1
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "description": "ファイル管理ID(UUID)",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "example": "990e8400-e29b-41d4-a716-446655440000"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ファイルダウンロード開始に成功した際のレスポンスコード",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "description": "ファイルダウンロード開始のレスポンス",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "ファイル管理ID(UUID)",
+                                            "example": "990e8400-e29b-41d4-a716-446655440000"
+                                        },
+                                        "chunkNo": {
+                                            "type": "number",
+                                            "description": "ファイル分割No",
+                                            "example": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/download/end/{id}": {
+            "post": {
+                "tags": [
+                    "ファイルダウンロード終了"
+                ],
+                "description": "ファイルダウンロードを終了します。",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "session",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "セッション情報",
+                            "example": {
+                                "sessionId": "sessionId",
+                                "operatorId": 1,
+                                "type": 3,
+                                "loginId": "loginid",
+                                "name": "test-user",
+                                "mobilePhone": "0311112222",
+                                "auth": {
+                                    "add": true,
+                                    "update": true,
+                                    "delete": true
+                                },
+                                "lastLoginAt": "2020-01-01T00:00:00.000+0900",
+                                "attributes": {},
+                                "roles": [
+                                    {
+                                        "_value": 1,
+                                        "_ver": 1
+                                    }
+                                ],
+                                "block": {
+                                    "_value": 1000110,
+                                    "_ver": 1
+                                },
+                                "actor": {
+                                    "_value": 1000001,
+                                    "_ver": 1
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "description": "ファイル管理ID(UUID)",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "example": "990e8400-e29b-41d4-a716-446655440000"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ファイルダウンロード開始に成功した際のレスポンスコード",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "description": "ファイルダウンロード終了のレスポンス",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "ファイル管理ID(UUID)",
+                                            "example": "990e8400-e29b-41d4-a716-446655440000"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "description": "処理結果(Downloading、Complete、Canceled、Failed)",
+                                            "example": "Complete"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/download/cancel/{id}": {
+            "post": {
+                "tags": [
+                    "ファイルダウンロードキャンセル"
+                ],
+                "description": "ファイルダウンロードをキャンセルします。",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "session",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "セッション情報",
+                            "example": {
+                                "sessionId": "sessionId",
+                                "operatorId": 1,
+                                "type": 3,
+                                "loginId": "loginid",
+                                "name": "test-user",
+                                "mobilePhone": "0311112222",
+                                "auth": {
+                                    "add": true,
+                                    "update": true,
+                                    "delete": true
+                                },
+                                "lastLoginAt": "2020-01-01T00:00:00.000+0900",
+                                "attributes": {},
+                                "roles": [
+                                    {
+                                        "_value": 1,
+                                        "_ver": 1
+                                    }
+                                ],
+                                "block": {
+                                    "_value": 1000110,
+                                    "_ver": 1
+                                },
+                                "actor": {
+                                    "_value": 1000001,
+                                    "_ver": 1
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "description": "ファイル管理ID(UUID)",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "example": "990e8400-e29b-41d4-a716-446655440000"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ファイルダウンロードキャンセルに成功した際のレスポンスコード",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "description": "ファイルダウンロードキャンセルのレスポンス",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "ファイル管理ID(UUID)",
+                                            "example": "990e8400-e29b-41d4-a716-446655440000"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "description": "処理結果(Downloading、Complete、Canceled、Failed)",
+                                            "example": "Canceled"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/upload/{id}/{chunkNo}": {
+            "post": {
+                "tags": [
+                    "ファイルアップロード"
+                ],
+                "description": "ファイルをアップロードします。",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "session",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "セッション情報",
+                            "example": {
+                                "sessionId": "sessionId",
+                                "operatorId": 1,
+                                "type": 3,
+                                "loginId": "loginid",
+                                "name": "test-user",
+                                "mobilePhone": "0311112222",
+                                "auth": {
+                                    "add": true,
+                                    "update": true,
+                                    "delete": true
+                                },
+                                "lastLoginAt": "2020-01-01T00:00:00.000+0900",
+                                "attributes": {},
+                                "roles": [
+                                    {
+                                        "_value": 1,
+                                        "_ver": 1
+                                    }
+                                ],
+                                "block": {
+                                    "_value": 1000110,
+                                    "_ver": 1
+                                },
+                                "actor": {
+                                    "_value": 1000001,
+                                    "_ver": 1
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "description": "ファイル管理ID(UUID)",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "example": "990e8400-e29b-41d4-a716-446655440000"
+                    },
+                    {
+                        "name": "chunkNo",
+                        "description": "ファイル分割No",
+                        "in": "path",
+                        "schema": {
+                            "type": "number"
+                        },
+                        "required": true,
+                        "example": 1
+                    }
+                ],
+                "requestBody": {
+                    "description": "ファイルアップロード",
+                    "required": true,
+                    "content": {
+                        "application/octet-stream": {
+                            "schema": {
+                                "type": "string",
+                                "format": "binary",
+                                "description": "ファイルアップロードのリクエストボディ"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ファイルアップロードに成功した際のレスポンスコード",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "description": "ファイルアップロードのレスポンス",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "ファイル管理ID(UUID)",
+                                            "example": "990e8400-e29b-41d4-a716-446655440000"
+                                        },
+                                        "chunkNo": {
+                                            "type": "number",
+                                            "description": "ファイル分割No",
+                                            "example": 1
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/upload/start": {
+            "post": {
+                "tags": [
+                    "ファイルアップロード開始"
+                ],
+                "description": "ファイルアップロードを開始します。",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "session",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "セッション情報",
+                            "example": {
+                                "sessionId": "sessionId",
+                                "operatorId": 1,
+                                "type": 3,
+                                "loginId": "loginid",
+                                "name": "test-user",
+                                "mobilePhone": "0311112222",
+                                "auth": {
+                                    "add": true,
+                                    "update": true,
+                                    "delete": true
+                                },
+                                "lastLoginAt": "2020-01-01T00:00:00.000+0900",
+                                "attributes": {},
+                                "roles": [
+                                    {
+                                        "_value": 1,
+                                        "_ver": 1
+                                    }
+                                ],
+                                "block": {
+                                    "_value": 1000110,
+                                    "_ver": 1
+                                },
+                                "actor": {
+                                    "_value": 1000001,
+                                    "_ver": 1
+                                }
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "ファイルアップロード開始",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "description": "ファイルアップロード開始のリクエストボディ",
+                                "properties": {
+                                    "fileName": {
+                                        "type": "string",
+                                        "description": "アップロードファイル名",
+                                        "example": "test.jpg"
+                                    },
+                                    "chunkCount": {
+                                        "type": "number",
+                                        "description": "ファイル分割数",
+                                        "example": 3
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ファイルアップロード開始に成功した際のレスポンスコード",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "description": "ファイルアップロード開始のレスポンス",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "ファイル管理ID(UUID)",
+                                            "example": "990e8400-e29b-41d4-a716-446655440000"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/upload/end/{id}": {
+            "post": {
+                "tags": [
+                    "ファイルアップロード終了"
+                ],
+                "description": "ファイルアップロードを終了します。",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "session",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "セッション情報",
+                            "example": {
+                                "sessionId": "sessionId",
+                                "operatorId": 1,
+                                "type": 3,
+                                "loginId": "loginid",
+                                "name": "test-user",
+                                "mobilePhone": "0311112222",
+                                "auth": {
+                                    "add": true,
+                                    "update": true,
+                                    "delete": true
+                                },
+                                "lastLoginAt": "2020-01-01T00:00:00.000+0900",
+                                "attributes": {},
+                                "roles": [
+                                    {
+                                        "_value": 1,
+                                        "_ver": 1
+                                    }
+                                ],
+                                "block": {
+                                    "_value": 1000110,
+                                    "_ver": 1
+                                },
+                                "actor": {
+                                    "_value": 1000001,
+                                    "_ver": 1
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "description": "ファイル管理ID(UUID)",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "example": "990e8400-e29b-41d4-a716-446655440000"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ファイルアップロード開始に成功した際のレスポンスコード",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "description": "ファイルアップロード終了のレスポンス",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "ファイル管理ID(UUID)",
+                                            "example": "990e8400-e29b-41d4-a716-446655440000"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "description": "処理結果(Uploading、Complete、Canceled、Failed)",
+                                            "example": "Complete"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/upload/cancel/{id}": {
+            "post": {
+                "tags": [
+                    "ファイルアップロードキャンセル"
+                ],
+                "description": "ファイルアップロードをキャンセルします。",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "session",
+                        "required": false,
+                        "schema": {
+                            "type": "string",
+                            "description": "セッション情報",
+                            "example": {
+                                "sessionId": "sessionId",
+                                "operatorId": 1,
+                                "type": 3,
+                                "loginId": "loginid",
+                                "name": "test-user",
+                                "mobilePhone": "0311112222",
+                                "auth": {
+                                    "add": true,
+                                    "update": true,
+                                    "delete": true
+                                },
+                                "lastLoginAt": "2020-01-01T00:00:00.000+0900",
+                                "attributes": {},
+                                "roles": [
+                                    {
+                                        "_value": 1,
+                                        "_ver": 1
+                                    }
+                                ],
+                                "block": {
+                                    "_value": 1000110,
+                                    "_ver": 1
+                                },
+                                "actor": {
+                                    "_value": 1000001,
+                                    "_ver": 1
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "id",
+                        "description": "ファイル管理ID(UUID)",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "example": "990e8400-e29b-41d4-a716-446655440000"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ファイルアップロードキャンセルに成功した際のレスポンスコード",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "description": "ファイルアップロードキャンセルのレスポンス",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "ファイル管理ID(UUID)",
+                                            "example": "990e8400-e29b-41d4-a716-446655440000"
+                                        },
+                                        "result": {
+                                            "type": "string",
+                                            "description": "処理結果(Uploading、Complete、Canceled、Failed)",
+                                            "example": "Canceled"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{id}": {
+            "delete": {
+                "tags": [
+                    "ファイル管理データ削除"
+                ],
+                "description": "ファイル管理データを削除します。",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "ファイル管理ID(UUID)",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "example": "990e8400-e29b-41d4-a716-446655440000"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ファイル管理データ削除に成功した際のレスポンスコード",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "description": "ファイル管理データ削除のレスポンス",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "description": "ファイル管理ID(UUID)",
+                                            "example": "990e8400-e29b-41d4-a716-446655440000"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
