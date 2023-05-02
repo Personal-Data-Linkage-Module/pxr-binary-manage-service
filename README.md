@@ -1,3 +1,3 @@
- ## アクセス制御サービス pxr-access-control-service
+ ## バイナリ管理サービス pxr-binary-manage-service
 
 バイナリファイルのアップロード、ダウンロードを行います。
