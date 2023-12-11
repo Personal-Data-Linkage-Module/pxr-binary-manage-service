@@ -7,7 +7,8 @@ import { Connection, createConnection, getConnectionManager } from 'typeorm';
 /* eslint-enable */
 import FileUploadDataEntity from '../repositories/postgres/FileUploadDataEntity';
 import FileUploadManageEntity from '../repositories/postgres/FileUploadManageEntity';
-import fs = require('fs');
+
+const fs = require('fs');
 
 // configファイルを読み込む
 const connectOption = JSON.parse(fs.readFileSync('./config/ormconfig.json', 'UTF-8'));
