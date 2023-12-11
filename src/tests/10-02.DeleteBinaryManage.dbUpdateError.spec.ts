@@ -52,6 +52,7 @@ describe('binary-manage API', () => {
      */
     afterAll(async () => {
         // サーバ停止
+        common.disconnect();
         app.stop();
     });
     /**
