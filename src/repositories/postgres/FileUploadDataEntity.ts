@@ -26,25 +26,25 @@ export default class FileUploadDataEntity extends BaseEntity {
      * アップロードファイル管理ID
      */
     @Column({ type: 'varchar', length: 255, nullable: false, name: 'file_upload_manage_id' })
-    fileUploadManageId: string = null;
+        fileUploadManageId: string = null;
 
     /**
      * 連番
      */
     @Column({ type: 'bigint', nullable: false, default: 0, name: 'seq_no' })
-    seqNo: number = 0;
+        seqNo: number = 0;
 
     /**
      * ファイルデータ(バイナリ)
      */
     @Column({ type: 'bytea', nullable: false, name: 'file_data' })
-    fileData: Uint8Array = null;
+        fileData: Uint8Array = null;
 
     /**
      * 登録者
      */
     @Column({ type: 'varchar', length: 255, nullable: false, name: 'created_by' })
-    createdBy: string = '';
+        createdBy: string = '';
 
     /**
      * 登録日時
@@ -56,7 +56,7 @@ export default class FileUploadDataEntity extends BaseEntity {
      * 更新者
      */
     @Column({ type: 'varchar', length: 255, nullable: false, name: 'updated_by' })
-    updatedBy: string = '';
+        updatedBy: string = '';
 
     /**
      * 更新日時

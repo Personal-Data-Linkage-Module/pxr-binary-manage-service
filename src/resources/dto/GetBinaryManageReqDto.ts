@@ -18,15 +18,15 @@ export default class GetBinaryManageReqDto {
     @IsOptional()
     @IsNumber()
     @Transform(transformToNumber)
-    status: number = null;
+        status: number = null;
 
     @IsOptional()
     @IsNumber()
     @Transform(transformToNumber)
-    offset: number = 0;
+        offset: number = 0;
 
     @IsOptional()
     @IsNumber()
     @Transform(transformToNumber)
-    limit: number = 10;
+        limit: number = 10;
 }

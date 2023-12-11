@@ -24,11 +24,11 @@ export default class PostDownloadReqDto {
     @IsDefined()
     @IsString()
     @IsNotEmpty()
-    manageId: string = null;
+        manageId: string = null;
 
     @IsDefined()
     @IsNotEmpty()
     @Transform(chunkNo => parseInt(chunkNo))
     @IsNumber()
-    chunkNo: number = null;
+        chunkNo: number = null;
 }

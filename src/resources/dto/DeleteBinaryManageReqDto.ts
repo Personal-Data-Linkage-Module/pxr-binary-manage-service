@@ -17,5 +17,5 @@ export default class DeleteBinaryManageReqDto {
     @IsDefined()
     @IsString()
     @IsNotEmpty()
-    manageId: string = null;
+        manageId: string = null;
 }

@@ -24,5 +24,5 @@ export default class PostDownloadCancelReqDto {
     @IsDefined()
     @IsString()
     @IsNotEmpty()
-    manageId: string = null;
+        manageId: string = null;
 }

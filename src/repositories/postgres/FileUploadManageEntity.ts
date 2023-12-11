@@ -110,37 +110,37 @@ export default class FileUploadManageEntity extends BaseEntity {
      * ID
      */
     @PrimaryColumn({ type: 'varchar', length: 255 })
-    id: string = null;
+        id: string = null;
 
     /**
      * ファイル名
      */
     @Column({ type: 'varchar', length: 255, nullable: false, name: 'file_name' })
-    fileName: string = null;
+        fileName: string = null;
 
     /**
      * ステータス
      */
     @Column({ type: 'smallint', nullable: false, default: 0, name: 'status' })
-    status: number = 0;
+        status: number = 0;
 
     /**
      * ファイル分割数
      */
     @Column({ type: 'bigint', nullable: false, default: 0, name: 'chunk_count' })
-    chunkCount: number = 0;
+        chunkCount: number = 0;
 
     /**
      * 削除フラグ
      */
     @Column({ type: 'boolean', nullable: false, default: false, name: 'is_disabled' })
-    isDisabled: boolean = false;
+        isDisabled: boolean = false;
 
     /**
      * 登録者
      */
     @Column({ type: 'varchar', length: 255, nullable: false, name: 'created_by' })
-    createdBy: string = '';
+        createdBy: string = '';
 
     /**
      * 登録日時
@@ -152,7 +152,7 @@ export default class FileUploadManageEntity extends BaseEntity {
      * 更新者
      */
     @Column({ type: 'varchar', length: 255, nullable: false, name: 'updated_by' })
-    updatedBy: string = '';
+        updatedBy: string = '';
 
     /**
      * 更新日時

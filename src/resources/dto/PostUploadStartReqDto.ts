@@ -24,11 +24,11 @@ export default class PostUploadStartReqDto {
     @IsDefined()
     @IsString()
     @IsNotEmpty()
-    fileName: string = null;
+        fileName: string = null;
 
     @IsDefined()
     @IsNotEmpty()
     @Transform(chunkCount => parseInt(chunkCount))
     @IsNumber()
-    chunkCount: number = null;
+        chunkCount: number = null;
 }
