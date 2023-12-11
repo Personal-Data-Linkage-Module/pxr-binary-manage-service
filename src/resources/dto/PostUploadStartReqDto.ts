@@ -28,7 +28,7 @@ export default class PostUploadStartReqDto {
 
     @IsDefined()
     @IsNotEmpty()
-    @Transform(chunkCount => parseInt(chunkCount))
+    @Transform(({ value }) => { return parseInt(value); })
     @IsNumber()
         chunkCount: number = null;
 }

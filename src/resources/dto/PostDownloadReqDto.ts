@@ -28,7 +28,7 @@ export default class PostDownloadReqDto {
 
     @IsDefined()
     @IsNotEmpty()
-    @Transform(chunkNo => parseInt(chunkNo))
+    @Transform(({ value }) => { return parseInt(value); })
     @IsNumber()
         chunkNo: number = null;
 }
