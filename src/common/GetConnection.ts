@@ -6,9 +6,9 @@ https://opensource.org/licenses/mit-license.php
 import { createConnection, getConnection, Connection } from 'typeorm';
 import FileUploadDataEntity from '../repositories/postgres/FileUploadDataEntity';
 import FileUploadManageEntity from '../repositories/postgres/FileUploadManageEntity';
-import fs = require('fs');
 
 // 環境ごとにconfigファイルを読み込む
+const fs = require('fs');
 const ormConfig = JSON.parse(fs.readFileSync('./config/ormconfig.json', 'UTF-8'));
 
 // エンティティを設定

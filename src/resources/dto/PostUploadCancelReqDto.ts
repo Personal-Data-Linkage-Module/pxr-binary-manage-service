@@ -24,5 +24,5 @@ export default class PostUploadCancelReqDto {
     @IsDefined()
     @IsString()
     @IsNotEmpty()
-    manageId: string = null;
+        manageId: string = null;
 }

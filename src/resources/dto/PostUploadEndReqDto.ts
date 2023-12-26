@@ -24,5 +24,5 @@ export default class PostUploadEndReqDto {
     @IsDefined()
     @IsString()
     @IsNotEmpty()
-    manageId: string = null;
+        manageId: string = null;
 }

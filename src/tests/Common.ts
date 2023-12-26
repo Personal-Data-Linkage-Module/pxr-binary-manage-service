@@ -4,7 +4,8 @@ https://opensource.org/licenses/mit-license.php
 */
 import Db from './Db';
 import path = require('path');
-import fs = require('fs');
+
+const fs = require('fs');
 
 // テスト用にlisten数を無制限に設定
 require('events').EventEmitter.defaultMaxListeners = 0;

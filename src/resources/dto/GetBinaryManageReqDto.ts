@@ -17,16 +17,16 @@ import { transformToNumber } from '../../common/Transform';
 export default class GetBinaryManageReqDto {
     @IsOptional()
     @IsNumber()
-    @Transform(transformToNumber)
-    status: number = null;
+    @Transform(({ value }) => { return transformToNumber(value); })
+        status: number = null;
 
     @IsOptional()
     @IsNumber()
-    @Transform(transformToNumber)
-    offset: number = 0;
+    @Transform(({ value }) => { return transformToNumber(value); })
+        offset: number = 0;
 
     @IsOptional()
     @IsNumber()
-    @Transform(transformToNumber)
-    limit: number = 10;
+    @Transform(({ value }) => { return transformToNumber(value); })
+        limit: number = 10;
 }
