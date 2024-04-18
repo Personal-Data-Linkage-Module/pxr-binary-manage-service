@@ -60,8 +60,6 @@ COMMENT ON COLUMN pxr_binary_manage.file_upload_data.updated_at IS '更新日時
 -- 外部キーを追加
 ALTER TABLE pxr_binary_manage.file_upload_data ADD FOREIGN KEY (file_upload_manage_id) REFERENCES pxr_binary_manage.file_upload_manage(id);
 
-
-
-
-
-
+-- ユーザーにテーブル・シーケンスの操作権限を付与
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA pxr_binary_manage TO pxr_binary_manage_user;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA pxr_binary_manage TO pxr_binary_manage_user;
